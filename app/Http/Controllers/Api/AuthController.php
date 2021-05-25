@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 use Auth;
 
 use App\Models\User;
@@ -66,6 +67,9 @@ class AuthController extends Controller
 
         $request['password'] = Hash::make($request->password);
         $user = User::create($request->all());
+
+        $role = Role::whereName('user')->first();
+        $user->assignRole($role);
 
         $token = $user->CreateToken('token')->accessToken;
 
