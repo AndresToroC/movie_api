@@ -59,7 +59,7 @@ class SerieController extends Controller
 
         // Ubicacion donde se guardara la imagen
         $directory = 'public/serie';
-        $path = $directory.'/'.$imageName;
+        $path = 'serie/'.$imageName;
 
         $image->storeAs($directory, $imageName);
 
@@ -120,7 +120,7 @@ class SerieController extends Controller
 
         if ($image) {
             // Se elimina imagen actual
-            Storage::delete($series->image);
+            Storage::delete('public/'.$series->image);
             
             // Se agrega nueva imagen
             $imageName = $series->id.'_'.Str::random(40).'.'.$image->getClientOriginalExtension();
@@ -147,6 +147,11 @@ class SerieController extends Controller
     public function destroy(Serie $series)
     {
         $series->categories()->detach();
+
+        if ($series->image) {
+            Storage::delete('public/'.$series->image);
+        }
+
         $series->delete();
         
         return response()->json([
