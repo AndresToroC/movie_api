@@ -12,9 +12,13 @@ use App\Models\Serie;
 
 class SerieController extends Controller
 {
+    public function __construct() {
+        $this->middleware('role:admin')->except(['index', 'show']);
+    }
+
     public function index()
     {
-        $series = Serie::with('categories')->paginate(20);
+        $series = Serie::with('categories', 'movies')->paginate(20);
 
         return response()->json([
             'series' => $series,
@@ -73,7 +77,7 @@ class SerieController extends Controller
 
     public function show(Serie $series)
     {
-        $series->load('categories');
+        $series->load('categories', 'movies');
 
         return response()->json([
             'serie' => $series,

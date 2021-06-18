@@ -12,9 +12,13 @@ use App\Models\Movie;
 
 class MovieController extends Controller
 {
+    public function __construct() {
+        $this->middleware('role:admin')->except(['index', 'show']);
+    }
+    
     public function index()
     {
-        $movies = Movie::with('serie')->paginate(20);
+        $movies = Movie::whereNull('serie_id')->paginate(20);
 
         return response()->json([
             'movies' => $movies,

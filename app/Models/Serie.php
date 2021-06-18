@@ -16,4 +16,8 @@ class Serie extends Model
     public function categories() {
         return $this->belongsToMany(Category::class);
     }
+
+    public function movies() {
+        return $this->hasMany(Movie::class);
+    }
 }

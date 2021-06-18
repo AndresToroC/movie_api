@@ -18,9 +18,7 @@ Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::middleware('auth:api')->group(function() {
     Route::get('logout', [AuthController::class, 'logout']);
 
-    Route::middleware('role:admin')->group(function() {
-        Route::resource('categories', CategoryController::class);
-        Route::resource('series', SerieController::class);
-        Route::resource('movies', MovieController::class);
-    });
+    Route::resource('series', SerieController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('movies', MovieController::class);
 });
