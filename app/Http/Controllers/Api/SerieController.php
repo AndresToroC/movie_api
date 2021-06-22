@@ -16,9 +16,9 @@ class SerieController extends Controller
         $this->middleware('role:admin')->except(['index', 'show']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $series = Serie::with('categories', 'movies')->paginate(20);
+        $series = Serie::with('categories', 'movies')->searchAndPaginate();
 
         return response()->json([
             'series' => $series,

@@ -5,9 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Helper\SearchPaginate;
+
 class Serie extends Model
 {
-    use HasFactory;
+    use HasFactory, SearchPaginate;
+
+    static $search_columns = ['name'];
 
     protected $fillable = [
         'name', 'description', 'image', 'director', 'actors'

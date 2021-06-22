@@ -14,9 +14,9 @@ class CategoryController extends Controller
         $this->middleware('role:admin');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(20);
+        $categories = Category::searchAndPaginate();
 
         return response()->json([
             'categories' => $categories,

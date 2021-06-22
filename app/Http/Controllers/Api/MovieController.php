@@ -16,9 +16,9 @@ class MovieController extends Controller
         $this->middleware('role:admin')->except(['index', 'show']);
     }
     
-    public function index()
+    public function index(Request $request)
     {
-        $movies = Movie::with('comments')->whereNull('serie_id')->paginate(20);
+        $movies = Movie::with('comments')->whereNull('serie_id')->searchAndPaginate();
 
         return response()->json([
             'movies' => $movies,
