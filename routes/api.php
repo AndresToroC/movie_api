@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\SerieController;
 use App\Http\Controllers\Api\MovieController;
+use App\Http\Controllers\Api\CommentController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -21,4 +22,5 @@ Route::middleware('auth:api')->group(function() {
     Route::resource('series', SerieController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('movies', MovieController::class);
+    Route::resource('movies.comments', CommentController::class);
 });

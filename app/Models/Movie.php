@@ -16,4 +16,8 @@ class Movie extends Model
     public function serie() {
         return $this->belongsTo(Serie::class);
     }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
 }

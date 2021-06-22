@@ -18,7 +18,7 @@ class MovieController extends Controller
     
     public function index()
     {
-        $movies = Movie::whereNull('serie_id')->paginate(20);
+        $movies = Movie::with('comments')->whereNull('serie_id')->paginate(20);
 
         return response()->json([
             'movies' => $movies,
